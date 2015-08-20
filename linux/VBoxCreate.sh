@@ -33,3 +33,5 @@ qemu-img convert -O vdi "$IMAGE.qcow2" "$MACHINE/$MACHINE.vdi"
 rm --force "$IMAGE.qcow2"
 
 VBoxManage storageattach "$MACHINE" --storagectl SATA --port 0 --type hdd --medium "$MACHINE/$MACHINE.vdi"
+
+VBoxManage unregistervm "$MACHINE"
