@@ -6,6 +6,7 @@ IMAGE=CentOS-7-x86_64-GenericCloud-1503
 
 VBoxManage createvm --name "$MACHINE" --ostype RedHat_64 --register --basefolder "$PWD"
 VBoxManage modifyvm "$MACHINE"\
+ --cpus 2\
  --memory 4096\
  --vram 16\
  --nictype1 virtio\
