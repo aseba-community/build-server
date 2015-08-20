@@ -10,7 +10,7 @@ VBoxManage modifyvm "$MACHINE"\
  --memory 4096\
  --vram 16\
  --nictype1 virtio\
- --natpf1 sshd,tcp,127.0.0.1,2222,,22\
+ --natpf1 sshd,tcp,,2222,,22\
  --natpf1 jenkins,tcp,,8080,,8080\
  --boot1 disk\
  --boot2 none\
