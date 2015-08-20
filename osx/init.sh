@@ -4,15 +4,15 @@
 cp authorized_keys ~/.ssh/authorized_keys
 launchctl load -w /System/Library/LaunchDaemons/ssh.plist
 
+# prevent sleep
+pmset -a sleep 0
+
 # set hostname
 HOSTNAME=aseba-build-server
 scutil --set ComputerName "$HOSTNAME"
 scutil --set HostName "$HOSTNAME"
 scutil --set LocalHostName "$HOSTNAME"
 defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$HOSTNAME"
-
-# prevent sleep
-pmset -a sleep 0
 
 if [ ! -f VirtualBox.dmg ]
 then curl --output VirtualBox.dmg http://download.virtualbox.org/virtualbox/5.0.2/VirtualBox-5.0.2-102096-OSX.dmg
