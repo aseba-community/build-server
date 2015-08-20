@@ -1,6 +1,8 @@
 #!/bin/sh
 
+# enable ssh login
 cp authorized_keys ~/.ssh/authorized_keys
+launchctl load -w /System/Library/LaunchDaemons/ssh.plist
 
 # set hostname
 HOSTNAME=aseba-build-server
