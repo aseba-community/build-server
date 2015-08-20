@@ -1,7 +1,7 @@
 #!/bin/sh
 cd `dirname "$0"`
 
-MACHINE=builder-linux
+MACHINE=build-linux
 IMAGE=CentOS-7-x86_64-GenericCloud-1503
 
 VBoxManage createvm --name "$MACHINE" --ostype RedHat_64 --register --basefolder "$PWD"

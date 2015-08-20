@@ -3,7 +3,7 @@
 mkdir --parents ~/.ssh
 cp authorized_keys ~/.ssh/authorized_keys
 
-echo mobsya-builder-linux > /etc/hostname
+echo aseba-build-linux > /etc/hostname
 timedatectl set-timezone Europe/Zurich
 
 curl --output /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo

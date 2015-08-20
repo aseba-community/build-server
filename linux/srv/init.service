@@ -4,8 +4,8 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=/srv/builder-linux/init.sh
-WorkingDirectory=/srv/builder-linux
+ExecStart=/srv/build-linux/init.sh
+WorkingDirectory=/srv/build-linux
 
 [Install]
 WantedBy=multi-user.target
