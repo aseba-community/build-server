@@ -9,7 +9,7 @@ jenkins.authorizationStrategy = new FullControlOnceLoggedInAuthorizationStrategy
 
 def updateCenter = jenkins.updateCenter
 updateCenter.updateAllSites()
-def plugins = [ "git-client", "github" ]
+def plugins = [ "git-client", "github", "build-monitor-plugin" ]
 	.collect { updateCenter.getPlugin(it) }
 	.grep { it.installed == null }
 	.plus(updateCenter.updates)
@@ -25,11 +25,14 @@ def securityRealm = new HudsonPrivateSecurityRealm(false, false, null)
 securityRealm.createAccount("jenkins", "jenkins")
 jenkins.securityRealm = securityRealm
 
+def xmlInput = { xml -> new ByteArrayInputStream(xml.getBytes("UTF-8")) }
+
 import hudson.model.FreeStyleProject
 import hudson.tasks.Builder
 import hudson.Launcher
 import hudson.model.AbstractBuild
 import hudson.model.TaskListener
+import hudson.model.View
 
 [
 	enki: [
@@ -48,6 +51,23 @@ import hudson.model.TaskListener
 	def name = it.key
 	def props = it.value
 
+	def view = View.createViewFromXML(name, xmlInput("""<?xml version="1.0" encoding="UTF-8"?>
+<com.smartcodeltd.jenkinsci.plugins.buildmonitor.BuildMonitorView plugin="build-monitor-plugin@1.6+build.150">
+  <name>${name}</name>
+  <filterExecutors>false</filterExecutors>
+  <filterQueue>false</filterQueue>
+  <properties class="hudson.model.View\$PropertyList"/>
+  <jobNames>
+    <comparator class="hudson.util.CaseInsensitiveComparator"/>
+  </jobNames>
+  <jobFilters/>
+  <columns/>
+  <recurse>false</recurse>
+  <order class="com.smartcodeltd.jenkinsci.plugins.buildmonitor.order.ByName"/>
+</com.smartcodeltd.jenkinsci.plugins.buildmonitor.BuildMonitorView>
+"""))
+	jenkins.addView(view)
+
 	[
 		"ubuntu-precise-amd64": "/srv/build-linux/jenkins/deb-machine.sh ubuntu-precise-amd64",
 		"ubuntu-precise-i386": "/srv/build-linux/jenkins/deb-machine.sh ubuntu-precise-i386",
@@ -59,7 +79,12 @@ import hudson.model.TaskListener
 		def machine = it.key
 		def command = it.value
 
-		def xml = """<?xml version='1.0' encoding='UTF-8'?>
+		def projectName = "${name}.${machine}"
+		def existing = jenkins.getItem(projectName)
+		if (existing != null)
+			jenkins.remove(existing)
+
+		def project = jenkins.createProjectFromXML(projectName, xmlInput("""<?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
   <description></description>
@@ -108,16 +133,10 @@ import hudson.model.TaskListener
   <publishers/>
   <buildWrappers/>
 </project>
-"""
-		def input = new ByteArrayInputStream(xml.getBytes("UTF-8"))
-
-		def projectName = "${name}.${machine}"
-		def existing = jenkins.getItem(projectName)
-		if (existing != null)
-			jenkins.remove(existing)
-
-		def project = jenkins.createProjectFromXML(projectName, input)
+"""))
+		view.add(project)
 	}
+
 }
 
 import java.nio.file.Files
