@@ -6,8 +6,9 @@ USER=administrator
 cp authorized_keys ~/.ssh/authorized_keys
 launchctl load -w /System/Library/LaunchDaemons/ssh.plist
 
-# prevent sleep
+# disable sleep, keep screen on for 3h
 pmset -a sleep 0
+pmset -a displaysleep 180
 
 # set hostname
 HOSTNAME=aseba-build-server
