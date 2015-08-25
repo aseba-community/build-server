@@ -10,7 +10,7 @@ fi
 sudo systemd-nspawn\
  --directory=machine\
  "--machine=$BUILD_TAG"\
- --bind=/srv/build-linux\
+ --bind=/srv/linux\
  --bind=/var/lib/jenkins\
- /srv/build-linux/jenkins/deb-build.sh\
+ /srv/linux/jenkins/deb-build.sh\
  "$WORKSPACE"

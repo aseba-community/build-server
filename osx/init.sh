@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/usr/bin/sudo -i sh
+
+cd `dirname "$0"`
 
 USER=administrator
 
@@ -34,19 +36,14 @@ installer -package "/Volumes/JDK 8 Update 60/JDK 8 Update 60.pkg" -target /
 hdiutil detach "/Volumes/JDK 8 Update 60"
 
 # setup user
-sudo -i -u $USER << EOF
-defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0
-VBoxManage registervm build-linux/build-linux.vbox
-mkdir -p Library/LaunchAgents
-EOF
-
-# setup login items
-cp *.plist "/Users/$USER/Library/LaunchAgents/"
-chown "$USER:staff" /Users/$USER/Library/LaunchAgents/*.plist
+sudo -i -u "$USER" "$PWD/user.sh"
 
 # login automatically
-defaults write /Library/Preferences/com.apple.loginwindow autoLoginUser $USER
+defaults write /Library/Preferences/com.apple.loginwindow autoLoginUser "$USER"
+
+# ask for password when exiting screensaver
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # install updates
 softwareupdate --install --all

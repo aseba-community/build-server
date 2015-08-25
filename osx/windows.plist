@@ -3,12 +3,12 @@
 <plist version="1.0">
 <dict>
   <key>Label</key>
-  <string>build-linux</string>
+  <string>windows</string>
   <key>ProgramArguments</key>
   <array>
     <string>/Applications/VirtualBox.app/Contents/MacOS/VBoxManage</string>
     <string>startvm</string>
-    <string>build-linux</string>
+    <string>windows</string>
   </array>
   <key>KeepAlive</key>
   <true/>
