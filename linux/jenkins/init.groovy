@@ -68,12 +68,12 @@ import hudson.model.View
 	jenkins.addView(view)
 
 	[
-		"ubuntu-precise-amd64": "/srv/linux/jenkins/deb-machine.sh ubuntu-precise-amd64",
-		"ubuntu-precise-i386": "/srv/linux/jenkins/deb-machine.sh ubuntu-precise-i386",
-		"ubuntu-trusty-amd64": "/srv/linux/jenkins/deb-machine.sh ubuntu-trusty-amd64",
-		"ubuntu-trusty-i386": "/srv/linux/jenkins/deb-machine.sh ubuntu-trusty-i386",
-		"ubuntu-vivid-amd64": "/srv/linux/jenkins/deb-machine.sh ubuntu-vivid-amd64",
-		"ubuntu-vivid-i386": "/srv/linux/jenkins/deb-machine.sh ubuntu-vivid-i386",
+		"ubuntu-precise-amd64": "/srv/linux/jenkins/deb-machine.sh precise amd64",
+		"ubuntu-precise-i386": "/srv/linux/jenkins/deb-machine.sh precise i386",
+		"ubuntu-trusty-amd64": "/srv/linux/jenkins/deb-machine.sh trusty amd64",
+		"ubuntu-trusty-i386": "/srv/linux/jenkins/deb-machine.sh trusty i386",
+		"ubuntu-vivid-amd64": "/srv/linux/jenkins/deb-machine.sh vivid amd64",
+		"ubuntu-vivid-i386": "/srv/linux/jenkins/deb-machine.sh vivid i386",
 	].each {
 		def machine = it.key
 		def command = it.value

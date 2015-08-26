@@ -22,7 +22,7 @@ for release in precise trusty vivid
 do
 	for arch in amd64 i386
 	do
-		machine=ubuntu-$release-$arch
+		machine=$release-$arch
 		directory=/var/lib/container/$machine
 		debootstrap "--arch=$arch" --include=equivs,git-buildpackage --components=main,universe --variant=buildd "$release" "$directory" http://archive.ubuntu.com/ubuntu/
 		# precise doesn't have this file
