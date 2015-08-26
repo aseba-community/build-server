@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 
 mkdir --parents ~/.ssh
 cp authorized_keys ~/.ssh/authorized_keys

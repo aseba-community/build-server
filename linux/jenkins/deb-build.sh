@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 
 WORKSPACE=$1
 
