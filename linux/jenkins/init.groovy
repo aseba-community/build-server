@@ -64,8 +64,7 @@ import hudson.model.View
   <columns/>
   <recurse>false</recurse>
   <order class="com.smartcodeltd.jenkinsci.plugins.buildmonitor.order.ByName"/>
-</com.smartcodeltd.jenkinsci.plugins.buildmonitor.BuildMonitorView>
-"""))
+</com.smartcodeltd.jenkinsci.plugins.buildmonitor.BuildMonitorView>"""))
 	jenkins.addView(view)
 
 	[
@@ -135,8 +134,7 @@ import hudson.model.View
   </builders>
   <publishers/>
   <buildWrappers/>
-</project>
-"""))
+</project>"""))
 		view.add(project)
 	}
 
