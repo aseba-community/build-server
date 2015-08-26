@@ -37,15 +37,15 @@ import hudson.model.View
 [
 	enki: [
 		git: "https://github.com/enki-community/enki.git",
-		github: "https://github.com/enki-community/enki",
+		github: "https://github.com/enki-community/enki/",
 	],
 	dashel: [
 		git: "https://github.com/aseba-community/dashel.git",
-		github: "https://github.com/aseba-community/dashel",
+		github: "https://github.com/aseba-community/dashel/",
 	],
 	aseba: [
 		git: "https://github.com/aseba-community/aseba.git",
-		github: "https://github.com/aseba-community/aseba",
+		github: "https://github.com/aseba-community/aseba/",
 	],
 ].each {
 	def name = it.key
@@ -90,7 +90,7 @@ import hudson.model.View
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.12.1">
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.13.0">
       <projectUrl>${props.github}</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
   </properties>
