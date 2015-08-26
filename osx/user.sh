@@ -8,7 +8,7 @@ VBoxManage createvm --name linux --ostype RedHat_64 --register
 VBoxManage modifyvm linux\
  --cpus 2\
  --memory 4096\
- --vram 16\
+ --vram 64\
  --nictype1 virtio\
  --natpf1 sshd,tcp,,2222,,22\
  --natpf1 jenkins,tcp,,8080,,8080\
