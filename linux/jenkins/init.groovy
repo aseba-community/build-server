@@ -112,6 +112,9 @@ import hudson.model.View
       <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
         <relativeTargetDir>source</relativeTargetDir>
       </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+      <hudson.plugins.git.extensions.impl.LocalBranch>
+        <localBranch>master</localBranch>
+      </hudson.plugins.git.extensions.impl.LocalBranch>
     </extensions>
   </scm>
   <canRoam>true</canRoam>
