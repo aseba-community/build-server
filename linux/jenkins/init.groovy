@@ -126,7 +126,7 @@ import hudson.model.View
       <ignorePostCommitHooks>false</ignorePostCommitHooks>
     </hudson.triggers.SCMTrigger>
   </triggers>
-  <concurrentBuild>true</concurrentBuild>
+  <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
       <command>${command}</command>
