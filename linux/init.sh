@@ -28,6 +28,7 @@ do
 		# precise doesn't have this file
 		touch "$directory/etc/os-release"
 		systemd-nspawn "--directory=$directory" apt-get clean
+		echo deb file:/var/lib/jenkins/userContent $release origin/master > "$directory/etc/apt/sources.list.d/jenkins.list"
 	done
 done
 

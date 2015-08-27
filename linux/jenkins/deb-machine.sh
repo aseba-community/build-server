@@ -20,3 +20,6 @@ sudo systemd-nspawn\
 TARGET="$JENKINS_HOME/userContent/dists/$RELEASE/$GIT_BRANCH/binary-$ARCH"
 mkdir -p "$TARGET"
 cp *.* "$TARGET"
+
+cd "$TARGET"
+dpkg-scanpackages . > Packages
