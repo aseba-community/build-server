@@ -38,14 +38,17 @@ import hudson.model.View
 	enki: [
 		git: "https://github.com/enki-community/enki.git",
 		github: "https://github.com/enki-community/enki/",
+		upstream: [],
 	],
 	dashel: [
 		git: "https://github.com/aseba-community/dashel.git",
 		github: "https://github.com/aseba-community/dashel/",
+		upstream: [],
 	],
 	aseba: [
 		git: "https://github.com/aseba-community/aseba.git",
 		github: "https://github.com/aseba-community/aseba/",
+		upstream: ["enki", "dashel"],
 	],
 ].each {
 	def name = it.key
@@ -79,10 +82,12 @@ import hudson.model.View
 		def command = it.value
 
 		def projectName = "${name}.${machine}"
+
 		def existing = jenkins.getItem(projectName)
 		if (existing != null)
 			jenkins.remove(existing)
 
+		def upstreamProjects = props.upstream.collect { "${it}.${machine}" }.join(",")
 		def project = jenkins.createProjectFromXML(projectName, xmlInput("""<?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
@@ -119,8 +124,18 @@ import hudson.model.View
   <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
-  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
   <triggers>
+    <jenkins.triggers.ReverseBuildTrigger>
+      <spec></spec>
+      <upstreamProjects>${upstreamProjects}</upstreamProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+        <completeBuild>true</completeBuild>
+      </threshold>
+    </jenkins.triggers.ReverseBuildTrigger>
     <hudson.triggers.SCMTrigger>
       <spec>H/15 * * * *</spec>
       <ignorePostCommitHooks>false</ignorePostCommitHooks>
