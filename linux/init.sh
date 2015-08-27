@@ -10,7 +10,7 @@ timedatectl set-timezone Europe/Zurich
 curl --output /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
 rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
 yum --assumeyes install epel-release
-yum --assumeyes install java jenkins git debootstrap
+yum --assumeyes install java jenkins git debootstrap dpkg-dev
 yum --assumeyes upgrade
 
 cp jenkins/sudoers /etc/sudoers.d/jenkins
