@@ -22,13 +22,17 @@ for release in precise trusty vivid
 do
 	for arch in amd64 i386
 	do
-		machine=$release-$arch
-		directory=/var/lib/container/$machine
-		debootstrap "--arch=$arch" --include=equivs,git-buildpackage --components=main,universe --variant=buildd "$release" "$directory" http://archive.ubuntu.com/ubuntu/
+		machine="$release-$arch"
+		container="/var/lib/container/$machine"
+
+		debootstrap "--arch=$arch" --include=equivs,git-buildpackage --components=main,universe --variant=buildd "$release" "$container" http://archive.ubuntu.com/ubuntu/
 		# precise doesn't have this file
-		touch "$directory/etc/os-release"
-		systemd-nspawn "--directory=$directory" apt-get clean
-		echo deb file:/var/lib/jenkins/userContent $release origin/master > "$directory/etc/apt/sources.list.d/jenkins.list"
+		touch "$container/etc/os-release"
+		systemd-nspawn "--directory=$container" apt-get clean
+
+		repository="/var/lib/jenkins/userContent/debian"
+		branch="origin/master"
+		echo deb "file:$repository" "$release" "$branch" > "$container/etc/apt/sources.list.d/jenkins.list"
 	done
 done
 

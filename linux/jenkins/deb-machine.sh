@@ -17,9 +17,8 @@ sudo systemd-nspawn\
  /srv/linux/jenkins/deb-build.sh\
  "$WORKSPACE"
 
-TARGET="$JENKINS_HOME/userContent/dists/$RELEASE/$GIT_BRANCH/binary-$ARCH"
-mkdir -p "$TARGET"
-cp *.* "$TARGET"
-
-cd "$TARGET"
-dpkg-scanpackages . > Packages
+DEBIAN_DIR="$JENKINS_HOME/userContent/debian"
+BINARY_DIR="dists/$RELEASE/$GIT_BRANCH/binary-$ARCH"
+cp *.* "$DEBIAN_DIR/$BINARY_DIR"
+cd "$DEBIAN_DIR"
+dpkg-scanpackages "$BINARY_DIR" > "$BINARY_DIR/Packages"

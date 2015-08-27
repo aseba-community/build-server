@@ -156,4 +156,17 @@ import hudson.model.View
 }
 
 import java.nio.file.Files
+
+def dists = jenkins.root.toPath().resolve("userContent").resolve("debian").resolve("dists")
+["precise", "trusty", "vivid"].each {
+	def release = dists.resolve(it)
+	def branch = release.resolve("origin/master")
+	["amd64", "i386"].each {
+		def arch = branch.resolve("binary-${it}")
+		Files.createDirectories(arch)
+		def packages = arch.resolve("Packages")
+		Files.createFile(packages)
+	}
+}
+
 Files.deleteIfExists(jenkins.root.toPath().resolve("init.groovy"))
