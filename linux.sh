@@ -9,7 +9,7 @@ then curl --remote-name http://cloud.centos.org/centos/7/images/$IMAGE.qcow2.xz
 fi
 
 xz --decompress --keep "$IMAGE.qcow2.xz"
-qemu-img resize "$IMAGE.qcow2" 16G
+qemu-img resize "$IMAGE.qcow2" 32G
 
 LIBGUESTFS_BACKEND=direct guestfish --add "$IMAGE.qcow2" --inspector << EOF
 copy-in "$MACHINE" /srv/
