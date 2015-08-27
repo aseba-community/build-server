@@ -1,5 +1,6 @@
 #!/bin/sh
 set -eu
+cd `dirname "$0"`
 
 mkdir --parents ~/.ssh
 cp authorized_keys ~/.ssh/authorized_keys
