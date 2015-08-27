@@ -5,9 +5,6 @@ cd `dirname "$0"`
 mkdir --parents ~/.ssh
 cp authorized_keys ~/.ssh/authorized_keys
 
-echo aseba-build-linux > /etc/hostname
-timedatectl set-timezone Europe/Zurich
-
 curl --output /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
 rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
 yum --assumeyes install epel-release
@@ -36,6 +33,9 @@ do
 		echo deb "file:$repository" "$release" "$branch" > "$container/etc/apt/sources.list.d/jenkins.list"
 	done
 done
+
+echo aseba-build-linux > /etc/hostname
+timedatectl set-timezone Europe/Zurich
 
 systemctl disable init.service
 systemctl reboot
