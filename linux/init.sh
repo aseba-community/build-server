@@ -8,11 +8,13 @@ cp authorized_keys ~/.ssh/authorized_keys
 curl --output /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
 rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
 yum --assumeyes install epel-release
-yum --assumeyes install java jenkins git debootstrap dpkg-dev
+yum --assumeyes install java jenkins git debootstrap dpkg-dev lftp
 yum --assumeyes upgrade
 
 cp jenkins/sudoers /etc/sudoers.d/jenkins
 cp jenkins/init.groovy /var/lib/jenkins/init.groovy
+cp jenkins/netrc /var/lib/jenkins/.netrc
+chown jenkins:jenkins /var/lib/jenkins/.netrc
 systemctl enable jenkins.service
 
 # ubuntu
