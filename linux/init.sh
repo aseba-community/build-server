@@ -8,8 +8,11 @@ cp authorized_keys ~/.ssh/authorized_keys
 curl --output /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
 rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
 yum --assumeyes install epel-release
-yum --assumeyes install java jenkins git debootstrap dpkg-dev lftp
+yum --assumeyes install java jenkins git debootstrap dpkg-dev lftp yum-cron
 yum --assumeyes upgrade
+
+sed --in-place "s/apply_updates = no/apply_updates = yes/" /etc/yum/yum-cron.conf
+systemctl enable yum-cron
 
 cp jenkins/sudoers /etc/sudoers.d/jenkins
 cp jenkins/init.groovy /var/lib/jenkins/init.groovy
