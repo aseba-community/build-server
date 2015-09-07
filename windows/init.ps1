@@ -22,3 +22,5 @@ Invoke-WebRequest -Uri http://download.oracle.com/otn-pub/java/jdk/8u60-b27/serv
 
 # setup jenkins slave
 Invoke-WebRequest -Uri http://stidhcp-1-064.epfl.ch:8080/jnlpJars/slave.jar -OutFile slave.jar
+$jenkinsSlaveXml = Get-Content -Path E:\jenkins-slave.xml -Raw
+Register-ScheduledTask -TaskName "jenkins-slave" -Xml $jenkinsSlaveXml
