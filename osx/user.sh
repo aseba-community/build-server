@@ -1,4 +1,6 @@
 #!/bin/sh
+set -eu
+cd `dirname "$0"`
 
 # allow ssh key-based login
 cp authorized_keys ~/.ssh/authorized_keys

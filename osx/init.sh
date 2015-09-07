@@ -1,5 +1,5 @@
 #!/usr/bin/sudo -i sh
-
+set -eu
 cd `dirname "$0"`
 
 USER=administrator

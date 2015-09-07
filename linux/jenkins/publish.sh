@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 
 cd "$JENKINS_HOME/userContent"
 
