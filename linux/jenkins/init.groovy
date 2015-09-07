@@ -24,6 +24,7 @@ import hudson.security.HudsonPrivateSecurityRealm
 def securityRealm = new HudsonPrivateSecurityRealm(false, false, null)
 securityRealm.createAccount("jenkins", "jenkins")
 jenkins.securityRealm = securityRealm
+jenkins.slaveAgentPort = 5143
 
 def xmlInput = { xml -> new ByteArrayInputStream(xml.getBytes("UTF-8")) }
 
@@ -186,6 +187,15 @@ jenkins.createProjectFromXML("publish", xmlInput("""<?xml version='1.0' encoding
 	}
 
 }
+
+import hudson.model.Node
+import hudson.slaves.DumbSlave
+import hudson.slaves.JNLPLauncher
+import hudson.slaves.RetentionStrategy
+def launcher = new JNLPLauncher()
+def retentionStrategy = new RetentionStrategy.Always()
+def windows = new DumbSlave("windows", "", "C:\\Users\\Administrator\\Jenkins", "1", Node.Mode.EXCLUSIVE, "windows", launcher, retentionStrategy, [])
+jenkins.addNode(windows)
 
 import java.nio.file.Files
 

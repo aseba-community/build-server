@@ -14,6 +14,7 @@ VBoxManage modifyvm linux\
  --nictype1 virtio\
  --natpf1 sshd,tcp,,2222,,22\
  --natpf1 jenkins,tcp,,8080,,8080\
+ --natpf1 jenkins-slave-agent,tcp,,5143,,5143\
  --boot1 disk\
  --boot2 none\
  --boot3 none
@@ -26,7 +27,6 @@ VBoxManage modifyvm windows\
  --cpus 1\
  --memory 2048\
  --vram 64\
- --nictype1 virtio\
  --boot1 dvd\
  --boot2 disk\
  --boot3 none
@@ -35,7 +35,6 @@ VBoxManage createhd --filename windows.vdi --size 32768
 VBoxManage storageattach windows --storagectl SATA --port 0 --type hdd --medium windows.vdi
 VBoxManage storageattach windows --storagectl SATA --port 1 --type dvddrive --medium SW_DVD9_Windows_Svr_Std_and_DataCtr_2012_R2_64Bit_English_-3_MLF_X19-53588.iso
 VBoxManage storageattach windows --storagectl SATA --port 2 --type dvddrive --medium windows.iso
-VBoxManage storageattach windows --storagectl SATA --port 3 --type dvddrive --medium VBoxGuestAdditions.iso
 
 # install WebViewScreenSaver
 if [ ! -f WebViewScreenSaver.zip ]
