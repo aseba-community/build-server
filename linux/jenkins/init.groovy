@@ -22,7 +22,7 @@ if (!plugins.empty) {
 
 import hudson.security.HudsonPrivateSecurityRealm
 def securityRealm = new HudsonPrivateSecurityRealm(false, false, null)
-securityRealm.createAccount("jenkins", "jenkins")
+securityRealm.createAccount("jenkins", "changeme")
 jenkins.securityRealm = securityRealm
 jenkins.slaveAgentPort = 5143
 
