@@ -1,4 +1,5 @@
 /id_rsa
 /CentOS-7-x86_64-GenericCloud-1503.qcow2.xz
 /linux/jenkins/netrc
+/osx/*.iso
 /osx/*.vdi
