@@ -1,4 +1,4 @@
 /id_rsa
 /CentOS-7-x86_64-GenericCloud-1503.qcow2.xz
-/osx/*.iso
-/osx/*.vdi
+/*.iso
+/*.vdi

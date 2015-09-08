@@ -18,5 +18,5 @@ cp "/srv/$MACHINE/init.service" /etc/systemd/system/
 ln-s "/srv/$MACHINE/init.service" /etc/systemd/system/multi-user.target.wants/
 EOF
 
-qemu-img convert -O vdi "$IMAGE.qcow2" "osx/$MACHINE.vdi"
+qemu-img convert -O vdi "$IMAGE.qcow2" "$MACHINE.vdi"
 rm --force "$IMAGE.qcow2"
