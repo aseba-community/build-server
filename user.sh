@@ -34,6 +34,7 @@ VBoxManage storagectl windows --name SATA --add sata
 VBoxManage createhd --filename windows.vdi --size 32768
 VBoxManage storageattach windows --storagectl SATA --port 0 --type hdd --medium windows.vdi
 VBoxManage storageattach windows --storagectl SATA --port 1 --type dvddrive --medium SW_DVD9_Windows_Svr_Std_and_DataCtr_2012_R2_64Bit_English_-3_MLF_X19-53588.iso
+hdiutil makehybrid -iso -joliet -o windows.iso windows
 VBoxManage storageattach windows --storagectl SATA --port 2 --type dvddrive --medium windows.iso
 
 # install WebViewScreenSaver
