@@ -15,7 +15,7 @@ sudo systemd-nspawn\
  --bind=/srv/linux\
  --bind=/var/lib/jenkins\
  /srv/linux/jenkins/deb-build.sh\
- "$WORKSPACE"
+ "$WORKSPACE" "$BUILD_ID"
 
 DEBIAN_DIR="$JENKINS_HOME/userContent/debian"
 BINARY_DIR="dists/$RELEASE/$GIT_BRANCH/binary-$ARCH"
