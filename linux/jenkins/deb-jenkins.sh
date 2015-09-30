@@ -14,7 +14,7 @@ sudo systemd-nspawn\
  "--machine=$BUILD_TAG"\
  --bind=/srv/linux\
  --bind=/var/lib/jenkins\
- /srv/linux/jenkins/deb-build.sh\
+ /srv/linux/jenkins/deb-container.sh\
  "$WORKSPACE" "$BUILD_ID"
 
 DEBIAN_DIR="$JENKINS_HOME/userContent/debian"

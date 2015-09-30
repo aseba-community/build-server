@@ -16,9 +16,13 @@ systemctl enable yum-cron
 
 cp jenkins/sudoers /etc/sudoers.d/jenkins
 cp jenkins/init.groovy /var/lib/jenkins/init.groovy
+cp jenkins/gitconfig /var/lib/jenkins/.gitconfig
 cp jenkins/netrc /var/lib/jenkins/.netrc
 chown jenkins:jenkins /var/lib/jenkins/.netrc
 systemctl enable jenkins.service
+
+jenkins_uid=`id --user jenkins`
+jenkins_gid=`id --group jenkins`
 
 # ubuntu
 for release in precise trusty vivid
@@ -28,14 +32,11 @@ do
 		machine="$release-$arch"
 		container="/var/lib/container/$machine"
 
-		debootstrap "--arch=$arch" --include=equivs,git-buildpackage --components=main,universe --variant=buildd "$release" "$container" http://archive.ubuntu.com/ubuntu/
+		debootstrap "--arch=$arch" --include=equivs,git-buildpackage,sudo --components=main,universe --variant=buildd "$release" "$container" http://archive.ubuntu.com/ubuntu/
 		# precise doesn't have this file
 		touch "$container/etc/os-release"
-		systemd-nspawn "--directory=$container" apt-get clean
 
-		repository="/var/lib/jenkins/userContent/debian"
-		branch="origin/master"
-		echo deb "file:$repository" "$release" "$branch" > "$container/etc/apt/sources.list.d/jenkins.list"
+		systemd-nspawn "--directory=$container" --bind=/srv/linux --bind=/var/lib/jenkins /srv/linux/deb-init.sh "$release" "$jenkins_uid" "$jenkins_gid"
 	done
 done
 
