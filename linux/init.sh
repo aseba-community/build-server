@@ -25,16 +25,24 @@ jenkins_uid=`id --user jenkins`
 jenkins_gid=`id --group jenkins`
 
 # ubuntu
-for release in precise trusty vivid
+for release in precise trusty vivid wily
 do
 	for arch in amd64 i386
 	do
 		machine="$release-$arch"
 		container="/var/lib/container/$machine"
 
+		if [ ! -f "/usr/share/debootstrap/scripts/$release" ]
+		# debootstrap doesn't know the latest ubuntu releases
+		then ln -s gutsy "/usr/share/debootstrap/scripts/$release"
+		fi
+
 		debootstrap "--arch=$arch" --include=equivs,git-buildpackage,sudo --components=main,universe --variant=buildd "$release" "$container" http://archive.ubuntu.com/ubuntu/
+
+		if [ ! -f "$container/etc/os-release" ]
 		# precise doesn't have this file
-		touch "$container/etc/os-release"
+		then touch "$container/etc/os-release"
+		fi
 
 		systemd-nspawn "--directory=$container" --bind=/srv/linux --bind=/var/lib/jenkins /srv/linux/deb-init.sh "$release" "$jenkins_uid" "$jenkins_gid"
 	done
