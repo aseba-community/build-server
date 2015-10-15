@@ -13,4 +13,9 @@ mk-build-deps --install --tool "apt-get --no-install-recommends --assume-yes --f
 sudo -i -u jenkins /srv/linux/jenkins/deb-build.sh "$WORKSPACE" "$BUILD_ID"
 
 debuild clean
-git-buildpackage -us -uc
+
+if command -v gbp
+then gbp buildpackage -us -uc
+# precise has buildpackage as a git subcommand
+else git buildpackage -us -uc
+fi

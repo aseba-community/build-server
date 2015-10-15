@@ -100,6 +100,8 @@ jenkins.createProjectFromXML("publish", xmlInput("""<?xml version='1.0' encoding
 		"ubuntu-trusty-i386": "/srv/linux/jenkins/deb-jenkins.sh trusty i386",
 		"ubuntu-vivid-amd64": "/srv/linux/jenkins/deb-jenkins.sh vivid amd64",
 		"ubuntu-vivid-i386": "/srv/linux/jenkins/deb-jenkins.sh vivid i386",
+		"ubuntu-wily-amd64": "/srv/linux/jenkins/deb-jenkins.sh wily amd64",
+		"ubuntu-wily-i386": "/srv/linux/jenkins/deb-jenkins.sh wily i386",
 	].each {
 		def machine = it.key
 		def command = it.value
@@ -200,7 +202,7 @@ jenkins.addNode(windows)
 import java.nio.file.Files
 
 def dists = jenkins.root.toPath().resolve("userContent").resolve("debian").resolve("dists")
-["precise", "trusty", "vivid"].each {
+["precise", "trusty", "vivid", "wily"].each {
 	def release = dists.resolve(it)
 	def branch = release.resolve("origin/master")
 	["amd64", "i386"].each {
