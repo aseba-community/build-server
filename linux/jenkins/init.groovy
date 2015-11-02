@@ -119,7 +119,7 @@ jenkins.createProjectFromXML("publish", xmlInput("""<?xml version='1.0' encoding
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.13.0">
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.14.0">
       <projectUrl>${props.github}</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
   </properties>
@@ -144,6 +144,11 @@ jenkins.createProjectFromXML("publish", xmlInput("""<?xml version='1.0' encoding
       <hudson.plugins.git.extensions.impl.LocalBranch>
         <localBranch>master</localBranch>
       </hudson.plugins.git.extensions.impl.LocalBranch>
+      <hudson.plugins.git.extensions.impl.SubmoduleOption>
+        <disableSubmodules>false</disableSubmodules>
+        <recursiveSubmodules>true</recursiveSubmodules>
+        <trackingSubmodules>true</trackingSubmodules>
+      </hudson.plugins.git.extensions.impl.SubmoduleOption>
     </extensions>
   </scm>
   <canRoam>true</canRoam>
