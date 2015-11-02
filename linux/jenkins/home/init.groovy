@@ -29,10 +29,10 @@ jenkins.slaveAgentPort = 5143
 def xmlInput = { xml -> new ByteArrayInputStream(xml.getBytes("UTF-8")) }
 
 import hudson.model.View
-jenkins.addView(View.createViewFromXML(name, new ByteArrayInputStream("""<?xml version="1.0" encoding="UTF-8"?>
+jenkins.addView(View.createViewFromXML("monitor", new ByteArrayInputStream("""<?xml version="1.0" encoding="UTF-8"?>
 <com.smartcodeltd.jenkinsci.plugins.buildmonitor.BuildMonitorView plugin="build-monitor-plugin@1.6+build.159">
   <owner class="hudson" reference="../../.."/>
-  <name>${name}</name>
+  <name>monitor</name>
   <filterExecutors>false</filterExecutors>
   <filterQueue>false</filterQueue>
   <properties class="hudson.model.View\$PropertyList"/>
