@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<slave>
+  <name>windows</name>
+  <description></description>
+  <remoteFS>C:\Users\Administrator\Jenkins</remoteFS>
+  <numExecutors>1</numExecutors>
+  <mode>EXCLUSIVE</mode>
+  <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+  <launcher class="hudson.slaves.JNLPLauncher"/>
+  <label>windows</label>
+  <nodeProperties>
+    <hudson.tools.ToolLocationNodeProperty>
+      <locations>
+        <hudson.tools.ToolLocationNodeProperty_-ToolLocation>
+          <type>hudson.plugins.git.GitTool$DescriptorImpl</type>
+          <name>Default</name>
+          <home>C:\Program Files\Git\bin\git</home>
+        </hudson.tools.ToolLocationNodeProperty_-ToolLocation>
+      </locations>
+    </hudson.tools.ToolLocationNodeProperty>
+  </nodeProperties>
+  <userId>jenkins</userId>
+</slave>

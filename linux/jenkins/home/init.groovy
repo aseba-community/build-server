@@ -28,57 +28,10 @@ jenkins.slaveAgentPort = 5143
 
 def xmlInput = { xml -> new ByteArrayInputStream(xml.getBytes("UTF-8")) }
 
-import hudson.model.FreeStyleProject
-import hudson.tasks.Builder
-import hudson.Launcher
-import hudson.model.AbstractBuild
-import hudson.model.TaskListener
 import hudson.model.View
-
-jenkins.createProjectFromXML("publish", xmlInput("""<?xml version='1.0' encoding='UTF-8'?>
-<project>
-  <actions/>
-  <description></description>
-  <keepDependencies>false</keepDependencies>
-  <properties/>
-  <scm class="hudson.scm.NullSCM"/>
-  <canRoam>true</canRoam>
-  <disabled>false</disabled>
-  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
-  <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
-  <triggers/>
-  <concurrentBuild>false</concurrentBuild>
-  <builders>
-    <hudson.tasks.Shell>
-      <command>/srv/linux/jenkins/publish.sh</command>
-    </hudson.tasks.Shell>
-  </builders>
-  <publishers/>
-  <buildWrappers/>
-</project>"""))
-
-[
-	enki: [
-		git: "https://github.com/enki-community/enki.git",
-		github: "https://github.com/enki-community/enki/",
-		upstream: [],
-	],
-	dashel: [
-		git: "https://github.com/aseba-community/dashel.git",
-		github: "https://github.com/aseba-community/dashel/",
-		upstream: [],
-	],
-	aseba: [
-		git: "https://github.com/aseba-community/aseba.git",
-		github: "https://github.com/aseba-community/aseba/",
-		upstream: ["enki", "dashel"],
-	],
-].each {
-	def name = it.key
-	def props = it.value
-
-	def view = View.createViewFromXML(name, xmlInput("""<?xml version="1.0" encoding="UTF-8"?>
-<com.smartcodeltd.jenkinsci.plugins.buildmonitor.BuildMonitorView plugin="build-monitor-plugin@1.6+build.150">
+jenkins.addView(View.createViewFromXML(name, new ByteArrayInputStream("""<?xml version="1.0" encoding="UTF-8"?>
+<com.smartcodeltd.jenkinsci.plugins.buildmonitor.BuildMonitorView plugin="build-monitor-plugin@1.6+build.159">
+  <owner class="hudson" reference="../../.."/>
   <name>${name}</name>
   <filterExecutors>false</filterExecutors>
   <filterQueue>false</filterQueue>
@@ -88,134 +41,13 @@ jenkins.createProjectFromXML("publish", xmlInput("""<?xml version='1.0' encoding
   </jobNames>
   <jobFilters/>
   <columns/>
+  <includeRegex>.*</includeRegex>
   <recurse>false</recurse>
-  <order class="com.smartcodeltd.jenkinsci.plugins.buildmonitor.order.ByName"/>
-</com.smartcodeltd.jenkinsci.plugins.buildmonitor.BuildMonitorView>"""))
-	jenkins.addView(view)
-
-	[
-		"ubuntu-precise-amd64": "/srv/linux/jenkins/deb-jenkins.sh precise amd64",
-		"ubuntu-precise-i386": "/srv/linux/jenkins/deb-jenkins.sh precise i386",
-		"ubuntu-trusty-amd64": "/srv/linux/jenkins/deb-jenkins.sh trusty amd64",
-		"ubuntu-trusty-i386": "/srv/linux/jenkins/deb-jenkins.sh trusty i386",
-		"ubuntu-vivid-amd64": "/srv/linux/jenkins/deb-jenkins.sh vivid amd64",
-		"ubuntu-vivid-i386": "/srv/linux/jenkins/deb-jenkins.sh vivid i386",
-		"ubuntu-wily-amd64": "/srv/linux/jenkins/deb-jenkins.sh wily amd64",
-		"ubuntu-wily-i386": "/srv/linux/jenkins/deb-jenkins.sh wily i386",
-	].each {
-		def machine = it.key
-		def command = it.value
-
-		def projectName = "${name}.${machine}"
-
-		def existing = jenkins.getItem(projectName)
-		if (existing != null)
-			jenkins.remove(existing)
-
-		def upstreamProjects = props.upstream.collect { "${it}.${machine}" }.join(",")
-		def project = jenkins.createProjectFromXML(projectName, xmlInput("""<?xml version='1.0' encoding='UTF-8'?>
-<project>
-  <actions/>
-  <description></description>
-  <keepDependencies>false</keepDependencies>
-  <properties>
-    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.14.0">
-      <projectUrl>${props.github}</projectUrl>
-    </com.coravy.hudson.plugins.github.GithubProjectProperty>
-  </properties>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.4.0">
-    <configVersion>2</configVersion>
-    <userRemoteConfigs>
-      <hudson.plugins.git.UserRemoteConfig>
-        <url>${props.git}</url>
-      </hudson.plugins.git.UserRemoteConfig>
-    </userRemoteConfigs>
-    <branches>
-      <hudson.plugins.git.BranchSpec>
-        <name>*/master</name>
-      </hudson.plugins.git.BranchSpec>
-    </branches>
-    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
-    <submoduleCfg class="list"/>
-    <extensions>
-      <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-        <relativeTargetDir>source</relativeTargetDir>
-      </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-      <hudson.plugins.git.extensions.impl.LocalBranch>
-        <localBranch>master</localBranch>
-      </hudson.plugins.git.extensions.impl.LocalBranch>
-      <hudson.plugins.git.extensions.impl.SubmoduleOption>
-        <disableSubmodules>false</disableSubmodules>
-        <recursiveSubmodules>true</recursiveSubmodules>
-        <trackingSubmodules>true</trackingSubmodules>
-      </hudson.plugins.git.extensions.impl.SubmoduleOption>
-    </extensions>
-  </scm>
-  <canRoam>true</canRoam>
-  <disabled>false</disabled>
-  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
-  <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
-  <triggers>
-    <jenkins.triggers.ReverseBuildTrigger>
-      <spec></spec>
-      <upstreamProjects>${upstreamProjects}</upstreamProjects>
-      <threshold>
-        <name>SUCCESS</name>
-        <ordinal>0</ordinal>
-        <color>BLUE</color>
-        <completeBuild>true</completeBuild>
-      </threshold>
-    </jenkins.triggers.ReverseBuildTrigger>
-    <hudson.triggers.SCMTrigger>
-      <spec>H/15 * * * *</spec>
-      <ignorePostCommitHooks>false</ignorePostCommitHooks>
-    </hudson.triggers.SCMTrigger>
-  </triggers>
-  <concurrentBuild>false</concurrentBuild>
-  <builders>
-    <hudson.tasks.Shell>
-      <command>${command}</command>
-    </hudson.tasks.Shell>
-  </builders>
-  <publishers>
-    <hudson.tasks.BuildTrigger>
-      <childProjects>publish</childProjects>
-      <threshold>
-        <name>SUCCESS</name>
-        <ordinal>0</ordinal>
-        <color>BLUE</color>
-        <completeBuild>true</completeBuild>
-      </threshold>
-    </hudson.tasks.BuildTrigger>
-  </publishers>
-  <buildWrappers/>
-</project>"""))
-		view.add(project)
-	}
-
-}
-
-import hudson.model.Node
-import hudson.slaves.DumbSlave
-import hudson.slaves.JNLPLauncher
-import hudson.slaves.RetentionStrategy
-def launcher = new JNLPLauncher()
-def retentionStrategy = new RetentionStrategy.Always()
-def windows = new DumbSlave("windows", "", "C:\\Users\\Administrator\\Jenkins", "1", Node.Mode.EXCLUSIVE, "windows", launcher, retentionStrategy, [])
-jenkins.addNode(windows)
+  <title>aseba-build-server</title>
+  <config>
+    <order class="com.smartcodeltd.jenkinsci.plugins.buildmonitor.order.ByName"/>
+  </config>
+</com.smartcodeltd.jenkinsci.plugins.buildmonitor.BuildMonitorView>""".getBytes("UTF-8"))))
 
 import java.nio.file.Files
-
-def dists = jenkins.root.toPath().resolve("userContent").resolve("debian").resolve("dists")
-["precise", "trusty", "vivid", "wily"].each {
-	def release = dists.resolve(it)
-	def branch = release.resolve("origin/master")
-	["amd64", "i386"].each {
-		def arch = branch.resolve("binary-${it}")
-		Files.createDirectories(arch)
-		def packages = arch.resolve("Packages")
-		Files.createFile(packages)
-	}
-}
-
 Files.deleteIfExists(jenkins.root.toPath().resolve("init.groovy"))
