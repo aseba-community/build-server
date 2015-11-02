@@ -4,6 +4,8 @@ import jenkins.model.Jenkins
 
 def jenkins = Jenkins.instance
 
+jenkins.numExecutors = 0;
+
 import hudson.security.FullControlOnceLoggedInAuthorizationStrategy
 jenkins.authorizationStrategy = new FullControlOnceLoggedInAuthorizationStrategy()
 
@@ -48,6 +50,8 @@ jenkins.addView(View.createViewFromXML("monitor", new ByteArrayInputStream("""<?
     <order class="com.smartcodeltd.jenkinsci.plugins.buildmonitor.order.ByName"/>
   </config>
 </com.smartcodeltd.jenkinsci.plugins.buildmonitor.BuildMonitorView>""".getBytes("UTF-8"))))
+
+jenkins.numExecutors = 2
 
 import java.nio.file.Files
 Files.deleteIfExists(jenkins.root.toPath().resolve("init.groovy"))
