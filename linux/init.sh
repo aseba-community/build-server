@@ -15,10 +15,8 @@ sed --in-place "s/apply_updates = no/apply_updates = yes/" /etc/yum/yum-cron.con
 systemctl enable yum-cron
 
 cp jenkins/sudoers /etc/sudoers.d/jenkins
-cp jenkins/init.groovy /var/lib/jenkins/init.groovy
-cp jenkins/gitconfig /var/lib/jenkins/.gitconfig
-cp jenkins/netrc /var/lib/jenkins/.netrc
-chown jenkins:jenkins /var/lib/jenkins/.netrc
+cp --recursive --no-target-directory jenkins/home /var/lib/jenkins
+chown --recursive jenkins:jenkins /var/lib/jenkins
 systemctl enable jenkins.service
 
 jenkins_uid=`id --user jenkins`
