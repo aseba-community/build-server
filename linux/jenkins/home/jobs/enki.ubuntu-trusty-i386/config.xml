@@ -4,7 +4,7 @@
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.13.0">
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.14.0">
       <projectUrl>https://github.com/enki-community/enki/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
   </properties>
@@ -38,7 +38,7 @@
   <triggers>
     <jenkins.triggers.ReverseBuildTrigger>
       <spec></spec>
-      <upstreamProjects></upstreamProjects>
+      <upstreamProjects>enki</upstreamProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
@@ -46,10 +46,6 @@
         <completeBuild>true</completeBuild>
       </threshold>
     </jenkins.triggers.ReverseBuildTrigger>
-    <hudson.triggers.SCMTrigger>
-      <spec>H/15 * * * *</spec>
-      <ignorePostCommitHooks>false</ignorePostCommitHooks>
-    </hudson.triggers.SCMTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
