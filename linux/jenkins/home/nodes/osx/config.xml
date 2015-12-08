@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<slave>
+  <name>osx</name>
+  <description></description>
+  <remoteFS>/Users/administrator/jenkins</remoteFS>
+  <numExecutors>1</numExecutors>
+  <mode>EXCLUSIVE</mode>
+  <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+  <launcher class="hudson.slaves.JNLPLauncher"/>
+  <label>osx</label>
+  <nodeProperties/>
+  <userId>jenkins</userId>
+</slave>
