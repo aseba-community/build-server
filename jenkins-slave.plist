@@ -8,7 +8,7 @@
   <array>
     <string>java</string>
     <string>-jar</string>
-    <string>slave.jar</string>
+    <string>/Users/administrator/slave.jar</string>
     <string>-jnlpUrl</string>
     <string>http://stidhcp-1-064.epfl.ch:8080/computer/osx/slave-agent.jnlp</string>
     <string>-jnlpCredentials</string>
