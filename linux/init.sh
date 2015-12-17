@@ -8,8 +8,13 @@ cp authorized_keys ~/.ssh/authorized_keys
 curl --output /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
 rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
 yum --assumeyes install epel-release
-yum --assumeyes install java jenkins git debootstrap dpkg-dev lftp yum-cron
+yum --assumeyes install java jenkins git debootstrap dpkg-dev lftp yum-cron dkms
 yum --assumeyes upgrade
+
+curl --output /tmp/VBoxGuestAdditions.iso http://download.virtualbox.org/virtualbox/5.0.10/VBoxGuestAdditions_5.0.10.iso
+mkdir /tmp/VBoxGuestAdditions
+mount --options loop /tmp/VBoxGuestAdditions.iso /tmp/VBoxGuestAdditions
+/tmp/VBoxGuestAdditions/VBoxLinuxAdditions.run
 
 sed --in-place "s/apply_updates = no/apply_updates = yes/" /etc/yum/yum-cron.conf
 systemctl enable yum-cron
