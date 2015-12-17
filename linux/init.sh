@@ -33,7 +33,7 @@ do
 	for arch in amd64 i386
 	do
 		machine="$release-$arch"
-		container="/var/lib/container/$machine"
+		container="/var/lib/machines/$machine"
 
 		if [ ! -f "/usr/share/debootstrap/scripts/$release" ]
 		# debootstrap doesn't know the latest ubuntu releases
@@ -47,7 +47,10 @@ do
 		then touch "$container/etc/os-release"
 		fi
 
-		systemd-nspawn "--directory=$container" --bind=/srv/linux --bind=/var/lib/jenkins /srv/linux/deb-init.sh "$release" "$jenkins_uid" "$jenkins_gid"
+		# systemd-nspawn cannot run bind-mounted programs
+		cp --recursive /srv/linux "$container/srv/linux"
+
+		systemd-nspawn "--machine=$machine" --bind=/var/lib/jenkins /srv/linux/deb-init.sh "$release" "$jenkins_uid" "$jenkins_gid"
 	done
 done
 

@@ -4,14 +4,13 @@ set -eu
 RELEASE=$1
 ARCH=$2
 
-if [ ! -d machine ]
+if [ ! -d "/var/lib/machines/$JOB_NAME" ]
 #TODO: use tar.xz
-then sudo cp --recursive "/var/lib/container/$RELEASE-$ARCH" machine
+then sudo cp --recursive "/var/lib/machines/$RELEASE-$ARCH" "/var/lib/machines/$JOB_NAME"
 fi
 
 sudo systemd-nspawn\
- --directory=machine\
- "--machine=$BUILD_TAG"\
+ "--machine=$JOB_NAME"\
  --bind=/srv/linux\
  --bind=/var/lib/jenkins\
  /srv/linux/jenkins/deb-container.sh\
