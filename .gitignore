@@ -1,4 +1,5 @@
 /id_rsa
-/CentOS-7-x86_64-GenericCloud-1503.qcow2.xz
+/CentOS-7-x86_64-GenericCloud-*
 /*.iso
 /*.vdi
+/linux/cidata/user-data
