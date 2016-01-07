@@ -4,6 +4,8 @@ set -eu
 RELEASE=$1
 ARCH=$2
 
+rm -f *.build *.changes *.deb *.dsc *.tar.gz
+
 MACHINE="/var/lib/machines/$JOB_NAME"
 
 if sudo [ ! -d "$MACHINE" ]
