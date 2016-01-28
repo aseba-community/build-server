@@ -25,7 +25,7 @@ then
 	sudo cp /etc/sudoers.d/jenkins "$MACHINE/etc/sudoers.d/jenkins"
 
 	sudo chroot "$MACHINE" apt-get clean
-	echo deb file:/var/lib/jenkins/userContent/debian "$RELEASE" origin/master | sudo tee "$MACHINE/etc/apt/sources.list.d/jenkins.list"
+	echo deb file:/var/lib/jenkins/jobs/publish/workspace/debian "$RELEASE" origin/master | sudo tee "$MACHINE/etc/apt/sources.list.d/jenkins.list"
 fi
 
 if !(mount | grep --quiet --fixed-strings "$MACHINE")
@@ -35,9 +35,3 @@ then
 fi
 
 sudo chroot "$MACHINE" /srv/linux/jenkins/deb-container.sh "$WORKSPACE" "$BUILD_ID"
-
-DEBIAN_DIR="$JENKINS_HOME/userContent/debian"
-BINARY_DIR="dists/$RELEASE/$GIT_BRANCH/binary-$ARCH"
-cp *.* "$DEBIAN_DIR/$BINARY_DIR"
-cd "$DEBIAN_DIR"
-dpkg-scanpackages "$BINARY_DIR" > "$BINARY_DIR/Packages"

@@ -11,7 +11,7 @@ jenkins.authorizationStrategy = new FullControlOnceLoggedInAuthorizationStrategy
 
 def updateCenter = jenkins.updateCenter
 updateCenter.updateAllSites()
-def plugins = [ "git-client", "github", "build-monitor-plugin" ]
+def plugins = [ "git-client", "github", "build-monitor-plugin", "copyartifact" ]
 	.collect { updateCenter.getPlugin(it) }
 	.grep { it.installed == null }
 	.plus(updateCenter.updates)
