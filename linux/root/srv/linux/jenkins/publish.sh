@@ -10,6 +10,8 @@ cd ..
 
 for index in `find -name index.html`
 do dir=`dirname "$index"`
+	latest="$dir/latest.php"
+	rm --force "$latest"
 	cat > "$index" <<EOF
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +24,9 @@ do dir=`dirname "$index"`
 EOF
 	for file in `ls --ignore=index.html -t "$dir"`
 	do
+		if ! [ -f "$latest" ]
+		then echo "<? header('Location: $file'); ?>" > $latest
+		fi
 		date=`stat --format=%y "$dir/$file" | cut --delimiter=. --fields=1`
 		cat >> "$index" <<EOF
 			<li>
