@@ -60,7 +60,7 @@
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>aseba_*</artifacts>
+      <artifacts>*.deb</artifacts>
       <allowEmptyArchive>false</allowEmptyArchive>
       <onlyIfSuccessful>true</onlyIfSuccessful>
       <fingerprint>false</fingerprint>
