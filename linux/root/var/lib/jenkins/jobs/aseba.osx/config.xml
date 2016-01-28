@@ -4,11 +4,12 @@
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.14.0">
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.14.2">
       <projectUrl>https://github.com/aseba-community/aseba-osx/</projectUrl>
+      <displayName></displayName>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
   </properties>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.4.0">
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.4.1">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
@@ -33,6 +34,7 @@
         <disableSubmodules>false</disableSubmodules>
         <recursiveSubmodules>true</recursiveSubmodules>
         <trackingSubmodules>true</trackingSubmodules>
+        <reference></reference>
       </hudson.plugins.git.extensions.impl.SubmoduleOption>
     </extensions>
   </scm>
@@ -52,6 +54,9 @@
         <completeBuild>true</completeBuild>
       </threshold>
     </jenkins.triggers.ReverseBuildTrigger>
+    <com.cloudbees.jenkins.GitHubPushTrigger plugin="github@1.14.2">
+      <spec></spec>
+    </com.cloudbees.jenkins.GitHubPushTrigger>
     <hudson.triggers.SCMTrigger>
       <spec>H/15 * * * *</spec>
       <ignorePostCommitHooks>false</ignorePostCommitHooks>
@@ -60,7 +65,10 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command></command>
+      <command>export PATH=/Applications/CMake.app/Contents/bin:/usr/local/Trolltech/Qt-4.8.7/bin:/usr/local/qwt-6.2.1/lib:$PATH
+export QT_PLUGIN_PATH=&quot;/usr/local/qwt-6.2.1/plugins:$QT_PLUGIN_PATH&quot;
+export ASEBA_DEP=~/aseba-dep
+source/build.sh</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
