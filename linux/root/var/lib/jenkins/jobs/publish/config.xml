@@ -31,6 +31,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -42,6 +43,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -53,6 +55,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -64,6 +67,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -75,6 +79,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -86,6 +91,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -97,6 +103,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -108,6 +115,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -119,6 +127,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -130,6 +139,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -141,6 +151,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -152,6 +163,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -163,6 +175,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -174,6 +187,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -185,6 +199,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -196,6 +211,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -207,6 +223,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -218,6 +235,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -229,6 +247,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -240,6 +259,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -251,6 +271,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -262,6 +283,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -273,6 +295,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -284,6 +307,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -295,6 +319,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -306,6 +331,7 @@
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
       </selector>
+      <flatten>true</flatten>
       <optional>true</optional>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
