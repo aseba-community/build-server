@@ -12,7 +12,7 @@
   <triggers>
     <jenkins.triggers.ReverseBuildTrigger>
       <spec></spec>
-      <upstreamProjects>aseba.ubuntu-precise-amd64,aseba.ubuntu-precise-i386,aseba.ubuntu-trusty-amd64,aseba.ubuntu-trusty-i386,aseba.ubuntu-vivid-amd64,aseba.ubuntu-vivid-i386,aseba.ubuntu-wily-amd64,aseba.ubuntu-wily-i386,aseba.windows,dashel.ubuntu-precise-amd64,dashel.ubuntu-precise-i386,dashel.ubuntu-trusty-amd64,dashel.ubuntu-trusty-i386,dashel.ubuntu-vivid-amd64,dashel.ubuntu-vivid-i386,dashel.ubuntu-wily-amd64,dashel.ubuntu-wily-i386,enki.ubuntu-precise-amd64,enki.ubuntu-precise-i386,enki.ubuntu-trusty-amd64,enki.ubuntu-trusty-i386,enki.ubuntu-vivid-amd64,enki.ubuntu-vivid-i386,enki.ubuntu-wily-amd64,enki.ubuntu-wily-i386</upstreamProjects>
+      <upstreamProjects>aseba.osx,aseba.ubuntu-precise-amd64,aseba.ubuntu-precise-i386,aseba.ubuntu-trusty-amd64,aseba.ubuntu-trusty-i386,aseba.ubuntu-vivid-amd64,aseba.ubuntu-vivid-i386,aseba.ubuntu-wily-amd64,aseba.ubuntu-wily-i386,aseba.windows,dashel.ubuntu-precise-amd64,dashel.ubuntu-precise-i386,dashel.ubuntu-trusty-amd64,dashel.ubuntu-trusty-i386,dashel.ubuntu-vivid-amd64,dashel.ubuntu-vivid-i386,dashel.ubuntu-wily-amd64,dashel.ubuntu-wily-i386,enki.ubuntu-precise-amd64,enki.ubuntu-precise-i386,enki.ubuntu-trusty-amd64,enki.ubuntu-trusty-i386,enki.ubuntu-vivid-amd64,enki.ubuntu-vivid-i386,enki.ubuntu-wily-amd64,enki.ubuntu-wily-i386</upstreamProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
@@ -23,6 +23,17 @@
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.37">
+      <project>aseba.osx</project>
+      <filter></filter>
+      <target>osx/master</target>
+      <excludes></excludes>
+      <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
+        <stable>true</stable>
+      </selector>
+      <optional>true</optional>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.37">
       <project>aseba.ubuntu-precise-amd64</project>
       <filter></filter>
