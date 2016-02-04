@@ -8,6 +8,10 @@ USER=administrator
 cp authorized_keys ~/.ssh/authorized_keys
 launchctl load -w /System/Library/LaunchDaemons/ssh.plist
 
+# setup networking
+networksetup -setmanual Ethernet 128.178.145.91 255.255.255.0 128.178.145.1
+networksetup -setdnsservers Ethernet 128.178.15.8 128.178.15.7
+
 # disable sleep, keep screen on for 3h
 pmset -a sleep 0
 pmset -a displaysleep 180
