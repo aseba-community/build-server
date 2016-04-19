@@ -1,10 +1,18 @@
 #!/bin/sh
 set -eu
 
+cat > lftp << EOF
+set ssl:verify-certificate false
+open mobots.epfl.ch
+cd htdocs/data/aseba-build-server
+mirror --reverse
+EOF
+
 cd debian
 for file in `find -name Packages`
 do dir=`dirname "$file"`
-dpkg-scanpackages "$dir" > "$file"
+	dpkg-scanpackages "$dir" > "$file"
+	echo "put -O \"debian/$dir\" \"debian/$file\"" >> ../lftp
 done
 cd ..
 
@@ -25,7 +33,9 @@ EOF
 	for file in `ls --ignore=index.html -t "$dir"`
 	do
 		if ! [ -f "$latest" ]
-		then echo "<? header('Location: $file'); ?>" > $latest
+		then
+			echo "<? header('Location: $file'); ?>" > $latest
+			echo "put -O \"$dir\" \"$latest\"" >> lftp
 		fi
 		date=`stat --format=%y "$dir/$file" | cut --delimiter=. --fields=1`
 		cat >> "$index" <<EOF
@@ -39,11 +49,7 @@ EOF
 	</body>
 </html>
 EOF
+	echo "put -O \"$dir\" \"$index\"" >> lftp
 done
 
-lftp << EOF
-set ssl:verify-certificate false
-open mobots.epfl.ch
-cd htdocs/data/aseba-build-server
-mirror --reverse
-EOF
+lftp < lftp
