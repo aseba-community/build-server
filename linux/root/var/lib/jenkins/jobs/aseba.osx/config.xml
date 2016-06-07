@@ -73,7 +73,7 @@ source/build.sh</command>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>*.pkg</artifacts>
+      <artifacts>*.dmg</artifacts>
       <allowEmptyArchive>false</allowEmptyArchive>
       <onlyIfSuccessful>false</onlyIfSuccessful>
       <fingerprint>false</fingerprint>
